@@ -1,0 +1,16 @@
+{
+  "name": "typescript-learn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev":"rollup -cw"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "roolup": "^1.0.4",
+    "typescript": "^4.6.4"
+  }
+}
