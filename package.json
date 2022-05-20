@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":"rollup -cw"
+    "dev": "rollup -cw"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.3.0",
+    "eslint": "^8.15.0",
+    "eslint-plugin-react": "^7.30.0",
     "rollup-plugin-serve": "^1.1.0",
     "rollup-plugin-typescript2": "^0.31.2",
     "roolup": "^1.0.4",

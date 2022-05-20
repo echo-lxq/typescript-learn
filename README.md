@@ -93,6 +93,7 @@ tsc : *无法加载文件 F:\npm_resouse\tsc.ps1，因为在此系统上禁止�
 ![](./images/rollupconfig.png)
 
 **ps.**运行 npm run dev报错如上图(dev 为package.json的scripts配置项)
+
 ![](./images/npm-run-dev.png)
 
 ①.package.json 文件有一个 scripts 字段，可以用于指定脚本命令，供 npm 直接调用。
@@ -206,4 +207,50 @@ string week ;要给它赋值，很明显它的值应该是从星期一到星期�
     val
     }
     }
+
+//对象类型 
+
+    const create = (obj:object)=>{
+    
+    }
+//除了基础教程其他都是对象类型
+
+    create([]);
+    create({});
+    create(function(){});
+    
+    //js中还有两个类型 symbol bigInt
+    let s1:symbol = Symbol('123');
+    let s2 = Symbol('123');
+    console.log(s1===s2) //不相等两个symbol永远不相等
+    
+    let num1 = Number.MAX_SAFE_INTEGER;
+    console.log(num1 + 1 === num1 +2) //超过最大值 结果相等
+    let big1 = BigInt(num1) + BigInt(1);
+    let big2 = BigInt(num1) + BigInt(2);
+    console.log(big1===big2) //结果为false -- 部分游览器还不支持Bigint
+    
+    //string | number | boolean | null | undefined | never | 元组 | 数组 | object | void | any
+
+//重复变量无法重新声明
+
+    // let name = "zf"; //报错，全局已经有name定义
+    //使用导出保证变量不受外界干扰
+    export{}
+    
+## 2.基础数据类型补充 ##
+
+//类型标注 -- 什么时候需要标注类型，什么时候不需要标注类型
+    //ts内部会有自动推导的功能
+    
+    let name = "string"; //如果默认初始化的时候 会进行类型推导不需要声明类型
+    
+    let num:Number = 123; //?number 和 Number
+    //number 用来标识他的基础数据类型是什么 Number类 也是一个类型
+    // (11).toString()
+    let num1:number = 11;
+    let num2:Number = 11;
+    let num3:number = Number(11); //将11转为number类型 还是 number
+    // let num4:number = new Number(11); //报错 类实例为对象
+
 
