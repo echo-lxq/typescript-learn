@@ -253,4 +253,18 @@ string week ;要给它赋值，很明显它的值应该是从星期一到星期�
     let num3:number = Number(11); //将11转为number类型 还是 number
     // let num4:number = new Number(11); //报错 类实例为对象
 
+**PS.可枚举**
+
+可枚举的属性是那些可以通过for..in循环迭代的属性
+
+以使用Object.defineProperty方法创build您自己的**不可枚举**的属性
+
+**Enumerable**：指定属性是否可以在for / in循环中返回。
+
+简单来说，用户定义的属性都是可枚举的，而内置对象不可枚举。
+一种情况除外：当属性的原型是继承于其它对象原型时，这时用户定义的属性就是不可枚举的
+
+
+
+
 
