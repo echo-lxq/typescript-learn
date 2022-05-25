@@ -240,7 +240,9 @@ string week ;要给它赋值，很明显它的值应该是从星期一到星期�
     
 ## 2.基础数据类型补充 ##
 
-//类型标注 -- 什么时候需要标注类型，什么时候不需要标注类型
+***A.part1***
+
+类型标注 -- 什么时候需要标注类型，什么时候不需要标注类型
     //ts内部会有自动推导的功能
     
     let name = "string"; //如果默认初始化的时候 会进行类型推导不需要声明类型
@@ -253,6 +255,25 @@ string week ;要给它赋值，很明显它的值应该是从星期一到星期�
     let num3:number = Number(11); //将11转为number类型 还是 number
     // let num4:number = new Number(11); //报错 类实例为对象
 
+
+**unknown** 实际上就是一个类型安全的any
+
+unknown 类型的变量，不能直接赋值给其他变量
+
+**对象 object 与 {}**
+
+    //加上？ 标识有没有都可以
+    let b:{name: string ,age?:number};
+    b = {name:"123"};
+    b.name = "456";
+	//[propName:string]:any 表示任意类型的属性
+	let c:{name: string ,[propName:string]:any};
+	//定义d为函数类型 且定义返回值 -- 设置函数结构的类型声明
+	let d = (a:number,b:number)=>number;
+	d = function(n1,n2){
+		return n1+n2;
+	}
+
 **PS.可枚举**
 
 可枚举的属性是那些可以通过for..in循环迭代的属性
@@ -264,7 +285,87 @@ string week ;要给它赋值，很明显它的值应该是从星期一到星期�
 简单来说，用户定义的属性都是可枚举的，而内置对象不可枚举。
 一种情况除外：当属性的原型是继承于其它对象原型时，这时用户定义的属性就是不可枚举的
 
+**原型链**
+
+原型链通俗易懂的理解就是可以把它想象成一个链条，互相连接构成一整串链子！
+
+而原型链中就是实例对象和原型对象之间的链接。
+
+**每个函数都有一个prototype属性**，这个**prototype属性**就是我们的**原型对象**，
+
+我们拿这个函数通过**new构造函数**创建出来的实例对象，
+
+**这个实例对象自己会有一个指针(_proto_)指向他的构造函数的原型对象**！
+
+这样构造函数和实例对象之间就通过( _proto_ )连接在一起形成了一条链子。
 
 
+*****B.part2*****
 
+**this没有隐式的any**
+
+当你在类的外部使用this关键字时，它会默认获得any类型。 比如，假设有一个Point类，并且我们要添加一个函数做为它的方法：
+
+    class Point {
+    constructor(public x, public y) {}
+    getDistance(p: Point) {
+    	let dx = p.x - this.x;
+    	let dy = p.y - this.y;
+    	return Math.sqrt(dx ** 2 + dy ** 2);
+    }
+    }
+    // ...
+    // Reopen the interface.
+    interface Point {
+    	distanceFromOrigin(point: Point): number;
+    }
+    Point.prototype.distanceFromOrigin = function(point: Point) {
+    	return this.getDistance({ x: 0, y: 0});
+    }
+
+这就产生了我们上面提到的错误 - 如果我们错误地拼写了**getDistance**并不会得到一个错误。 正因此，TypeScript有**noImplicitThis**选项。 当设置了它，TypeScript会产生一个错误当没有明确指定类型（或通过类型推断）的**this**被使用时。 解决的方法是在接口或函数上使用指定了类型的**this**参数：
+
+**关于number类型**
+和JavaScript一样，TypeScript里的所有数字都是浮点数。 这些浮点数的类型是number。 除了支持十进制和十六进制字面量，TypeScript还支持ECMAScript 2015中引入的二进制和八进制字面量。
+
+    let decLiteral: number = 6;
+    let hexLiteral: number = 0xf00d;
+    let binaryLiteral: number = 0b1010;
+    let octalLiteral: number = 0o744;
+
+**类型断言**
+
+类型断言好比其它语言里的类型转换，但是不进行特殊的数据检查和解构。 **它没有运行时的影响，只是在编译阶段起作用**。 TypeScript会假设你，程序员，已经进行了必须的检查。
+
+类型断言有两种形式。 其一是**“尖括号”**语法：
+
+    let someValue: any = "this is a string";
+    
+    let strLength: number = (<string>someValue).length;
+
+另一个为**as**语法：
+
+    let someValue: any = "this is a string";
+    
+    let strLength: number = (someValue as string).length;
+
+两种形式是等价的。 至于使用哪个大多数情况下是凭个人喜好；然而，当你在TypeScript里使用**JSX**时，只有as语法断言是被允许的。
+
+**类型别名**
+
+    type myType = 0 | 1 | 2 | 3 | 4;
+    let K:myType;
+    let l:myType;
+
+## **JSX** ##
+
+什么是JSX：JSX = javascript xml就是**Javascript和XML结合的一种格式**。是 JavaScript 的语法扩展，**只要你把HTML代码写在JS里，那就是JSX。**
+
+①.JSX **执行更快**，因为它在编译为 JavaScript 代码后进行了优化。
+
+​
+②.它是**类型安全**的，在编译过程中就能发现错误。
+
+​
+③.使用 JSX **编写模板更加简单快速**。
 
