@@ -1,22 +1,19 @@
-let  c = false;
-c = true;
-
-function f():number{
-    return 1;
+interface IUser{
+    name:string
+    age?:number //?代表可选属性
+}
+const user:IUser = {
+    name:"121",
 }
 
-//加上？ 标识有没有都可以
-let b:{name: string ,age?:number};
-b = {name:"123"};
-b.name = "456";
-console.log(b.name)
-console.log(b)
+//制度属性
 
-//类型别名 
+interface IUser1{
+    readonly name1:string
+}
 
-type myType = 0 | 1 | 2 | 3 | 4;
-let K:myType;
-let l:myType;
+const user1:IUser1 = {
+    name1:"123"
+}
 
-let arr:(string|number)[];
-arr=["123",'123'];
+// user1.name1 = 11; //报错 ，只能读取 不能更新

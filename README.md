@@ -369,3 +369,61 @@ unknown 类型的变量，不能直接赋值给其他变量
 ​
 ③.使用 JSX **编写模板更加简单快速**。
 
+## 关于yarn命令 ##
+**Yarn**是facebook发布的一款取代npm的包管理工具；
+
+    yarn add react
+	//代替npm来安装react
+	//比较快
+
+yarn命令可以自动安装项目中所有以来的node模块的包
+
+**#** 这样可以上传git的时候忽略掉依赖包，项目下载下来之后 使用 yarn命令安装项目中依赖的包
+
+## WebRTC ##
+
+**WebRTC**，即**Web Real-Time Communication**，web实时通信技术。简单地说就是在web浏览器里面引入实时通信，包括音视频通话等。
+
+WebRTC实现了基于网页的语音对话或视频通话，目的是无插件实现web端的实时通信的能力。
+
+WebRTC提供了视频会议的核心技术，包括音视频的采集、编解码、网络传输、展示等功能，并且还支持跨平台，包括linux、windows、mac、android等。
+
+1. **WebRTC三角形**
+![](./images/WebRTC_triangle.jpg)
+
+2. **WebRTC梯形**
+
+![](./images/WebRTC_trapezoid.jpg)
+
+3.**WebRTC新功能特性**
+
+![](./images/WebRTC_feature.jpg)
+
+**RTC** 实时通信技术
+
+## UDP与TCP ##
+
+![](./images/tcp_udp.jpg)
+
+## 接口 ##
+
+    interface IUser{
+    name:string
+    age?:number //?代表可选属性
+    }
+    const user:IUser = {
+    name:"121",
+    }
+    
+    //制度属性
+    
+    interface IUser1{
+    readonly name1:string
+    }
+    
+    const user1:IUser1 = {
+    name1:"123"
+    }
+    
+    // user1.name1 = 11; //报错 ，只能读取 不能更新
+
