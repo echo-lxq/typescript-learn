@@ -178,6 +178,25 @@ string week ;要给它赋值，很明显它的值应该是从星期一到星期�
     }
 //常亮枚举不会进行编译
 
+//枚举类型测试
+
+    enum FUNCTIONS{
+    'function1'= 1,
+    'function2',
+    'function3',
+    'function4'
+    }
+    enum FUNCTIONS1{
+    'function1'= 1,
+    'function2',
+    'function3',
+    'function4'
+    }
+
+    console.log(FUNCTIONS[1])
+    // console.log(FUNCTIONS.function1 === FUNCTIONS1.function1)  //这个是错误的 来自两个不同的枚举
+    console.log(FUNCTIONS[1] === FUNCTIONS1[1])
+
 //null 和 undefined
 //是任何类型中的子类型，在严格模式下 null->null undefined->undefined
 
@@ -420,7 +439,7 @@ WebRTC提供了视频会议的核心技术，包括音视频的采集、编解�
     name:"121",
     }
     
-    //制度属性
+只读属性
     
     interface IUser1{
     readonly name1:string
@@ -432,3 +451,165 @@ WebRTC提供了视频会议的核心技术，包括音视频的采集、编解�
     
     // user1.name1 = 11; //报错 ，只能读取 不能更新
 
+函数类型接口
+
+	interface IFunc{
+	    (name:string):string
+	}
+	
+	let func:IFunc = (name:string):string => a
+	
+	func("a");
+
+可索引类型接口
+
+	interface IStringArr{
+	    [index:number]:string|number
+	} 
+	let astr:IStringArr = ['1',2];
+	console.log(astr[0])
+	let aobj:IStringArr = {
+	    1:"1",
+	    2:"2"
+	}
+	console.log(aobj[1])
+
+类实现接口
+
+	interface IClass{
+	    name:string
+	}
+	
+	class UserI implements IClass{
+	    name: string;
+	    constructor(a:string){
+	        this.name = a;
+	    }
+	}
+	
+	let userI1 = new UserI("lee");
+	userI1.name = "lees";
+	console.log(userI1)
+
+继承接口 -- 实现继承的接口的时候需要同时实现继承的父接口
+
+    interface IClassE extends IClass{
+    	age :number;
+    }
+    
+    class UserIE implements IClassE{
+    	name: string;
+    	age: number;
+    	constructor(name:string,age:number){
+    		this.name = name,
+    		this.age = age
+    	}
+    }
+    
+    let userIe = new UserIE("lee",18);
+    
+    console.log(userIe)
+
+## 类 ##
+
+类的修饰符
+
+	class Lee{
+	    //默认public
+	    public name:string;
+	    private _dna = ''; //在类外面不能访问——实例也不能
+	    constructor(name:string){
+	        this.name = name;
+	    }
+	    output(){
+	        console.log(this.name)
+	    }
+	}
+	
+	let lee = new Lee("lxq");
+	lee.output();
+
+继承
+
+	class Parent{
+	    readonly firstName:string = "lee";
+	    protected _dna:string|undefined; //受保护的可以在子类继承,但是不能外部访问到
+	    private tag:string = "sada";
+	}
+	
+	class Child extends Parent{
+	    say(){
+	        console.log(this._dna)
+	    }
+	}
+	
+	let child = new Child();
+	console.log(child.firstName)
+	//只读不可以修改
+	// child.firstName = "asd";
+
+封装
+
+	class Person{
+	    private _name: string = "张三";
+	    get name():string{
+	        return this._name;
+	    }
+	
+	    set name(val:string){
+	        this._name = val + '123';
+	    }
+	}
+	
+	let person = new Person();
+	
+	console.log(person.name) //输出张三
+	
+	person.name = "李四";
+	
+	console.log(person.name) //输出李四123
+
+静态方法--不用实例就可以拿到
+
+    class Student{
+    	static classes:string = "三年10班" 
+    }
+    console.log(Student.classes)
+
+抽象类 -- 抽象类中的抽象方法都应该实现
+
+    abstract class Human{
+    	abstract say(): void; //函数 与返回值 不具体实现
+    	abstract eat(food:string): void;
+    	run():void{
+    		console.log("run fast");
+    	}
+    }
+    
+    class Man extends Human{
+    	say(): void {
+    		console.log("balabala");
+    	}
+    	eat(food: string): void {
+    		console.log("eat a " + food)
+    	}
+    }
+    
+    let man = new Man();
+    
+    man.say();
+    man.eat("apple");
+    man.run();
+
+构造函数 -- 初始化的时候去做一些事情
+
+    class Women{
+    	private _food:string;
+    	constructor(food:string){
+    		this._food = food;
+    	}
+    }
+    
+    let women = new Women("栗子");
+    
+    console.log(women);
